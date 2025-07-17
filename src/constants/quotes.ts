@@ -1,0 +1,35 @@
+type Quote = string;
+
+const quotes: Quote[] = [
+  "What do you want to be when you grow up? Kind.",
+  "What do you think is the biggest waste of time? Comparing yourself to others.",
+  "Do you have any other advice? Don't measure how valuable you are by the way you are treated.",
+  "Is your glass half empty or half full? I think I'm grateful to have a glass.",
+  "One of our greatest freedoms is how we react to things.",
+  "The greatest illusion is that life should be perfect.",
+  "Always remember you matter, you're important and you are loved, and you bring to this world things no one else can.",
+  "We often wait for kindness...but being kind to yourself can start now.",
+  "We have such a long way to go. Yes, but look how far we've come.",
+  "Isn't it odd. We can only see our outsides, but nearly everything happens on the inside",
+  "Imagine how we would be if we were less afraid.",
+  "When things get difficult remember who you are. Who am I? You are loved.",
+  "Home isn’t always a place is it? Sometimes I think you believe in me more than I do. You'll catch up.",
+  "Nothing beats kindness. It sits quietly beyond all things.",
+  "When the big things feel out of control focus on what you love right under your nose",
+  "I am truly tiny. The love inside you is as big as the universe.",
+  "What do we do when our hearts hurt? We wrap them with friendship, shared tears and time, till they wake hopeful and happy again.",
+  "Doing nothing with friends is never doing nothing, is it? No.",
+  "Sometimes I worry you'll all realise I'm ordinary. Love doesn't need you to be extraordinary.",
+  "What's your best discovery? That I'm enough as I am.",
+  "So you know all about me? Yes. And you still love me? We love you all the more.",
+  "This is easily my favourite place. Why? Because you are all here.",
+  "How do they look so together and perfect? There's a lot of frantic paddling going on beneath.",
+  "What's the bravest thing you've ever said? Help.",
+  "Just take this step... The horizon will look after itself.",
+  "Sometimes just getting up and carrying on is brave and magnificent.",
+  "I can't see a way through. Can you see your next step? Yes. Just take that.",
+  "When the dark clouds come... keep going",
+  "You know… Sometimes, your mind plays tricks on you. It can tell you you’re no good… that it’s all hopeless… but, I’ve discovered this. You are loved, and important. And you bring to this world things that no one else can. ...So hold on.",
+];
+
+export default quotes;

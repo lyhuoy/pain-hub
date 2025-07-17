@@ -1,0 +1,120 @@
+import { memo } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { Badge } from "@/components/ui/badge";
+import { Star } from "lucide-react";
+import type { MovieCardProps } from "@/types/movie";
+import { cn } from "@/lib/utils";
+import { isNew } from "@/lib/date-utils";
+
+const MovieCard = memo(({ movie, className }: MovieCardProps) => {
+  // Find the highest quality torrent
+  const getHighestQuality = () => {
+    if (!movie.torrents || movie.torrents.length === 0) return null;
+
+    const qualityOrder = ["3D", "2160p", "1080p", "720p", "480p"];
+
+    for (const quality of qualityOrder) {
+      const torrent = movie.torrents.find((t) => t.quality === quality);
+      if (torrent) return torrent.quality;
+    }
+
+    // If no standard quality found, return the first one
+    return movie.torrents[0].quality;
+  };
+
+  const highestQuality = getHighestQuality();
+
+  // Check if movie or any torrent is new
+  const movieIsNew = isNew(movie.date_uploaded_unix);
+  const hasNewTorrent = movie.torrents?.some((torrent) =>
+    isNew(torrent.date_uploaded_unix)
+  );
+  const showNewBadge = movieIsNew || hasNewTorrent;
+
+  return (
+    <div
+      className={cn(
+        "group overflow-hidden transition-all duration-300 rounded-lg border border-border/50 bg-card",
+        className
+      )}
+    >
+      <Link href={`/movie/${movie.id}`} className="block">
+        <div className="relative aspect-[2/3] overflow-hidden rounded-t-lg">
+          <Image
+            src={movie.medium_cover_image}
+            alt={movie.title}
+            fill
+            className="object-cover transition-transform duration-300 group-hover:scale-110"
+            sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
+            placeholder="blur"
+            blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyatONEcClUkkOhU8JU5QBMlBz/AJDKZGkVWUoJfPYNAEwC6BaQvjF3qV3R/9k="
+          />
+
+          {/* Quality badge */}
+          {highestQuality && (
+            <Badge
+              variant="secondary"
+              className="absolute top-3 left-3 bg-background/90 text-foreground hover:bg-background shadow-sm border-0"
+            >
+              {highestQuality}
+            </Badge>
+          )}
+
+          {/* NEW badge */}
+          {showNewBadge && (
+            <Badge
+              variant="default"
+              className="absolute top-3 left-3 ml-16 bg-red-500 text-white hover:bg-red-600 shadow-sm border-0 animate-pulse"
+            >
+              NEW
+            </Badge>
+          )}
+
+          {/* Rating badge */}
+          <div className="absolute top-3 right-3 flex items-center gap-1 bg-background/90 text-foreground px-2 py-1 rounded-md text-sm shadow-sm">
+            <Star className="w-3 h-3 fill-yellow-400 text-yellow-400" />
+            <span className="font-medium">{movie.rating}</span>
+          </div>
+        </div>
+
+        <div className="p-4">
+          <h3 className="font-semibold text-sm line-clamp-2 mb-3 text-card-foreground group-hover:text-primary transition-colors">
+            {movie.title}
+          </h3>
+
+          <div className="flex items-center justify-between text-xs text-muted-foreground mb-3">
+            <span className="font-medium">{movie.year}</span>
+            <span>{movie.runtime} min</span>
+          </div>
+
+          {movie.genres && movie.genres.length > 0 && (
+            <div className="flex flex-wrap gap-1">
+              {movie.genres.slice(0, 2).map((genre) => (
+                <Badge
+                  key={genre}
+                  variant="outline"
+                  className="text-xs bg-background/60 border-border text-muted-foreground hover:bg-background/80"
+                >
+                  {genre}
+                </Badge>
+              ))}
+              {movie.genres.length > 2 && (
+                <Badge
+                  variant="outline"
+                  className="text-xs bg-background/60 border-border text-muted-foreground hover:bg-background/80"
+                >
+                  +{movie.genres.length - 2}
+                </Badge>
+              )}
+            </div>
+          )}
+        </div>
+      </Link>
+    </div>
+  );
+});
+
+MovieCard.displayName = "MovieCard";
+
+export default MovieCard;
