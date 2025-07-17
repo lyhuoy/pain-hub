@@ -60,11 +60,9 @@ export default function MoviePage({ params }: MoviePageProps) {
   });
 
   const handleBackClick = () => {
-    // Check if there's previous history
     if (window.history.length > 1) {
       router.back();
     } else {
-      // Fallback to home page if no history
       router.push("/");
     }
   };
@@ -96,7 +94,6 @@ export default function MoviePage({ params }: MoviePageProps) {
   return (
     <Container>
       <div className="py-8">
-        {/* Back Button */}
         <Button
           variant="ghost"
           onClick={handleBackClick}
@@ -106,19 +103,16 @@ export default function MoviePage({ params }: MoviePageProps) {
           Back
         </Button>
 
-        {/* Movie Details */}
         {isLoading || !movie ? (
           <MovieDetailsSkeleton />
         ) : (
           <MovieDetails movie={movie} />
         )}
 
-        {/* Parental Guides - Load immediately, no waiting */}
         <div className="mt-8">
           <ParentalGuides movieId={movieId} />
         </div>
 
-        {/* Suggestions - Load immediately, no waiting */}
         <div className="mt-8">
           <MovieSuggestions movieId={movieId} />
         </div>

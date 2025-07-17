@@ -89,7 +89,6 @@ const FilterPanel = ({
       </CardHeader>
 
       <CardContent className="space-y-4">
-        {/* Search Bar */}
         <form onSubmit={handleSearchSubmit} className="flex gap-2">
           <div className="relative flex-1">
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
@@ -107,7 +106,6 @@ const FilterPanel = ({
           </Button>
         </form>
 
-        {/* Quick Filters */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           <div>
             <label className="text-sm font-medium mb-1 block">Quality</label>
@@ -198,7 +196,6 @@ const FilterPanel = ({
           </div>
         </div>
 
-        {/* Genre Filter - Expanded View */}
         <div className={cn("space-y-2", !isExpanded && "hidden")}>
           <label className="text-sm font-medium">Genre</label>
           <div className="flex flex-wrap gap-2">
@@ -227,7 +224,6 @@ const FilterPanel = ({
           </div>
         </div>
 
-        {/* Active Filters Display */}
         {hasActiveFilters && (
           <div className="flex flex-wrap gap-2 pt-2 border-t">
             <span className="text-sm text-muted-foreground">

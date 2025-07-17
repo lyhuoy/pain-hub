@@ -127,22 +127,18 @@ export default function HomePage() {
   return (
     <Container>
       <div className="py-8">
-        {/* Header */}
         <div className="mb-8">
           <h1 className="text-4xl font-bold mb-2">Pain Hub</h1>
         </div>
 
-        {/* Quote Display */}
         <QuoteDisplay className="mb-8" />
 
-        {/* Filters */}
         <FilterPanel
           filters={filters}
           onFiltersChange={handleFiltersChange}
           isLoading={isLoading}
         />
 
-        {/* Error State */}
         {error && (
           <div className="text-center py-12">
             <p className="text-muted-foreground mb-4">
@@ -157,7 +153,6 @@ export default function HomePage() {
           </div>
         )}
 
-        {/* Movies Grid */}
         {!error && (
           <>
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 mb-8">
@@ -170,7 +165,6 @@ export default function HomePage() {
                   ))}
             </div>
 
-            {/* Empty State */}
             {!isLoading && movies.length === 0 && (
               <div className="text-center py-12">
                 <p className="text-muted-foreground mb-4">
@@ -185,7 +179,6 @@ export default function HomePage() {
               </div>
             )}
 
-            {/* Pagination */}
             {totalPages > 1 && (
               <Pagination
                 currentPage={filters.page || 1}

@@ -15,7 +15,7 @@ export const useMovieDetails = (
     queryKey: [...movieKeys.detail(movieId), options],
     queryFn: () => fetchMovieDetails(movieId, options),
     enabled: !!movieId,
-    staleTime: 1000 * 60 * 10, // 10 minutes - movie details don't change often
+    staleTime: 1000 * 60 * 10,
   });
 };
 

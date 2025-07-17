@@ -14,7 +14,7 @@ const ParentalGuides = ({ movieId, className }: ParentalGuidesProps) => {
   const { data, isLoading, error } = useParentalGuides(movieId);
 
   if (error) {
-    return null; // Fail silently for parental guides
+    return null;
   }
 
   const guides = data?.data?.parental_guides || [];

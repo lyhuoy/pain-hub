@@ -1,24 +1,15 @@
-/**
- * Check if a date is considered "new" (uploaded within last 7 days)
- */
 export const isNew = (dateUploadedUnix: number): boolean => {
-  const now = Date.now() / 1000; // Convert to Unix timestamp
+  const now = Date.now() / 1000;
   const daysDifference = (now - dateUploadedUnix) / (24 * 60 * 60);
   return daysDifference <= 7;
 };
 
-/**
- * Check if a date is very recent (uploaded within last 24 hours)
- */
 export const isVeryRecent = (dateUploadedUnix: number): boolean => {
-  const now = Date.now() / 1000; // Convert to Unix timestamp
+  const now = Date.now() / 1000;
   const hoursDifference = (now - dateUploadedUnix) / (60 * 60);
   return hoursDifference <= 24;
 };
 
-/**
- * Format relative time from Unix timestamp
- */
 export const formatRelativeTime = (dateUploadedUnix: number): string => {
   const now = Date.now() / 1000;
   const secondsDifference = now - dateUploadedUnix;

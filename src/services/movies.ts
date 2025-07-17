@@ -7,15 +7,11 @@ import type {
   ParentalGuidesResponse,
 } from "@/types/movie";
 
-/**
- * Fetch movies list with optional filters
- */
 export const fetchMovies = async (
   filters: MovieFilters = {}
 ): Promise<MovieListResponse> => {
   const params = new URLSearchParams();
 
-  // Add filters to query params
   if (filters.limit) params.append("limit", filters.limit.toString());
   if (filters.page) params.append("page", filters.page.toString());
   if (filters.quality && filters.quality !== "all")
@@ -34,9 +30,6 @@ export const fetchMovies = async (
   return response.data;
 };
 
-/**
- * Fetch detailed movie information
- */
 export const fetchMovieDetails = async (
   movieId: number,
   options: {
@@ -56,9 +49,6 @@ export const fetchMovieDetails = async (
   return response.data;
 };
 
-/**
- * Fetch movie suggestions for a specific movie
- */
 export const fetchMovieSuggestions = async (
   movieId: number
 ): Promise<MovieSuggestionsResponse> => {
@@ -71,9 +61,6 @@ export const fetchMovieSuggestions = async (
   return response.data;
 };
 
-/**
- * Fetch parental guides for a specific movie
- */
 export const fetchParentalGuides = async (
   movieId: number
 ): Promise<ParentalGuidesResponse> => {
@@ -86,9 +73,6 @@ export const fetchParentalGuides = async (
   return response.data;
 };
 
-/**
- * Generate magnet link for a movie torrent
- */
 export const generateMagnetLink = (hash: string, title: string): string => {
   const encodedTitle = encodeURIComponent(title);
   const trackers = [

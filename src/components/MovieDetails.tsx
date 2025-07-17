@@ -29,9 +29,7 @@ const MovieDetails = ({ movie, className }: MovieDetailsProps) => {
 
   return (
     <div className={cn("space-y-6", className)}>
-      {/* Hero Section */}
       <div className="bg-card rounded-lg border border-border">
-        {/* Background Image */}
         {/* {movie.background_image && (
           <div className="absolute inset-0 -z-10">
             <Image
@@ -46,7 +44,6 @@ const MovieDetails = ({ movie, className }: MovieDetailsProps) => {
         )} */}
 
         <div className="relative grid md:grid-cols-[300px_1fr] gap-6 p-6">
-          {/* Movie Poster */}
           <div className="relative aspect-[2/3] w-full max-w-[300px] mx-auto md:mx-0">
             <Image
               src={movie.large_cover_image}
@@ -57,7 +54,6 @@ const MovieDetails = ({ movie, className }: MovieDetailsProps) => {
             />
           </div>
 
-          {/* Movie Info */}
           <div className="space-y-4">
             <div>
               <h1 className="text-3xl md:text-4xl font-bold mb-2">
@@ -82,7 +78,6 @@ const MovieDetails = ({ movie, className }: MovieDetailsProps) => {
               </div>
             </div>
 
-            {/* Genres */}
             {movie.genres && movie.genres.length > 0 && (
               <div className="flex flex-wrap gap-2">
                 {movie.genres.map((genre) => (
@@ -93,14 +88,12 @@ const MovieDetails = ({ movie, className }: MovieDetailsProps) => {
               </div>
             )}
 
-            {/* Description */}
             {movie.description_full && (
               <p className="text-muted-foreground leading-relaxed">
                 {movie.description_full}
               </p>
             )}
 
-            {/* Summary */}
             {movie.summary && (
               <div className="bg-muted/50 rounded-lg p-4 border-l-4 border-primary">
                 <h4 className="font-semibold text-foreground mb-2">Summary</h4>
@@ -195,7 +188,6 @@ const MovieDetails = ({ movie, className }: MovieDetailsProps) => {
               </div>
             )}
 
-            {/* External Links */}
             <div className="flex gap-2">
               {movie.imdb_code && (
                 <Button variant="outline" asChild>
@@ -228,7 +220,6 @@ const MovieDetails = ({ movie, className }: MovieDetailsProps) => {
         </div>
       </div>
 
-      {/* Cast Section */}
       {movie.cast && movie.cast.length > 0 && (
         <div className="bg-card p-6 rounded-lg border border-border">
           <h2 className="text-lg font-semibold mb-4 text-card-foreground">

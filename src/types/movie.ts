@@ -1,4 +1,3 @@
-// YTS API Response Types
 export interface Movie {
   id: number;
   url: string;

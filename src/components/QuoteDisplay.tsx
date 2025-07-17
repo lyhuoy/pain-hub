@@ -14,28 +14,25 @@ const QuoteDisplay = ({ className }: QuoteDisplayProps) => {
   const [currentQuote, setCurrentQuote] = useState<string>("");
   const [isLoading, setIsLoading] = useState(true);
 
-  // Get a random quote
   const getRandomQuote = (): string => {
     if (quotes.length === 0) return "";
     const randomIndex = Math.floor(Math.random() * quotes.length);
     return quotes[randomIndex];
   };
 
-  // Load random quote on component mount
   useEffect(() => {
     const randomQuote = getRandomQuote();
     setCurrentQuote(randomQuote);
     setIsLoading(false);
   }, []);
 
-  // Manual refresh function
   const refreshQuote = () => {
     setIsLoading(true);
     setTimeout(() => {
       const randomQuote = getRandomQuote();
       setCurrentQuote(randomQuote);
       setIsLoading(false);
-    }, 300); // Small delay for better UX
+    }, 300);
   };
   if (isLoading) {
     return (

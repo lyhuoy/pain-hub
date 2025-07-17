@@ -7,7 +7,7 @@ export const useMovieSuggestions = (movieId: number) => {
     queryKey: movieKeys.suggestions(movieId),
     queryFn: () => fetchMovieSuggestions(movieId),
     enabled: !!movieId,
-    staleTime: 1000 * 60 * 15, // 15 minutes - suggestions don't change often
+    staleTime: 1000 * 60 * 15,
   });
 };
 

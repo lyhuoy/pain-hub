@@ -8,7 +8,6 @@ import { cn } from "@/lib/utils";
 import { isNew } from "@/lib/date-utils";
 
 const MovieCard = memo(({ movie, className }: MovieCardProps) => {
-  // Find the highest quality torrent
   const getHighestQuality = () => {
     if (!movie.torrents || movie.torrents.length === 0) return null;
 
@@ -19,13 +18,11 @@ const MovieCard = memo(({ movie, className }: MovieCardProps) => {
       if (torrent) return torrent.quality;
     }
 
-    // If no standard quality found, return the first one
     return movie.torrents[0].quality;
   };
 
   const highestQuality = getHighestQuality();
 
-  // Check if movie or any torrent is new
   const movieIsNew = isNew(movie.date_uploaded_unix);
   const hasNewTorrent = movie.torrents?.some((torrent) =>
     isNew(torrent.date_uploaded_unix)
@@ -51,7 +48,6 @@ const MovieCard = memo(({ movie, className }: MovieCardProps) => {
             blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyatONEcClUkkOhU8JU5QBMlBz/AJDKZGkVWUoJfPYNAEwC6BaQvjF3qV3R/9k="
           />
 
-          {/* Quality badge */}
           {highestQuality && (
             <Badge
               variant="secondary"
@@ -61,7 +57,6 @@ const MovieCard = memo(({ movie, className }: MovieCardProps) => {
             </Badge>
           )}
 
-          {/* NEW badge */}
           {showNewBadge && (
             <Badge
               variant="default"
@@ -71,7 +66,6 @@ const MovieCard = memo(({ movie, className }: MovieCardProps) => {
             </Badge>
           )}
 
-          {/* Rating badge */}
           <div className="absolute top-3 right-3 flex items-center gap-1 bg-background/90 text-foreground px-2 py-1 rounded-md text-sm shadow-sm">
             <Star className="w-3 h-3 fill-yellow-400 text-yellow-400" />
             <span className="font-medium">{movie.rating}</span>

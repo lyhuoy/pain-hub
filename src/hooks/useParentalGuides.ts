@@ -7,7 +7,7 @@ export const useParentalGuides = (movieId: number) => {
     queryKey: movieKeys.parentalGuides(movieId),
     queryFn: () => fetchParentalGuides(movieId),
     enabled: !!movieId,
-    staleTime: 1000 * 60 * 30, // 30 minutes - parental guides rarely change
+    staleTime: 1000 * 60 * 30,
   });
 };
 

@@ -8,7 +8,7 @@ export const useMovies = (filters: MovieFilters = {}) => {
     queryKey: movieKeys.list(filters),
     queryFn: () => fetchMovies(filters),
     enabled: true,
-    staleTime: 1000 * 60 * 5, // 5 minutes
+    staleTime: 1000 * 60 * 5,
   });
 };
 

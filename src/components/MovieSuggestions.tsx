@@ -14,7 +14,7 @@ const MovieSuggestions = ({ movieId, className }: MovieSuggestionsProps) => {
   const { data, isLoading, error } = useMovieSuggestions(movieId);
 
   if (error) {
-    return null; // Fail silently for suggestions
+    return null;
   }
 
   const suggestions = data?.data?.movies || [];

@@ -32,7 +32,6 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <div className="relative">
-            {/* Theme Toggle - Fixed position on left */}
             <div className="fixed top-4 left-4 z-50">
               <ThemeToggle />
             </div>
