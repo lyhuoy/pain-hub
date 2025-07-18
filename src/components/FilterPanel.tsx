@@ -106,9 +106,9 @@ const FilterPanel = ({
           </Button>
         </form>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-4">
           <div>
-            <label className="text-sm font-medium mb-1 block">Quality</label>
+            <label className="text-sm font-medium mb-2 block">Quality</label>
             <Select
               value={filters.quality || "all"}
               onValueChange={(value) =>
@@ -119,7 +119,7 @@ const FilterPanel = ({
               }
               disabled={isLoading}
             >
-              <SelectTrigger>
+              <SelectTrigger className="h-10 w-full shadow-none">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
@@ -133,13 +133,13 @@ const FilterPanel = ({
           </div>
 
           <div>
-            <label className="text-sm font-medium mb-1 block">Sort By</label>
+            <label className="text-sm font-medium mb-2 block">Sort By</label>
             <Select
               value={filters.sort_by || "date_added"}
               onValueChange={(value) => handleFilterChange("sort_by", value)}
               disabled={isLoading}
             >
-              <SelectTrigger>
+              <SelectTrigger className="h-10 w-full shadow-none">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
@@ -153,7 +153,7 @@ const FilterPanel = ({
           </div>
 
           <div>
-            <label className="text-sm font-medium mb-1 block">Min Rating</label>
+            <label className="text-sm font-medium mb-2 block">Min Rating</label>
             <Select
               value={filters.minimum_rating?.toString() || "0"}
               onValueChange={(value) =>
@@ -164,7 +164,7 @@ const FilterPanel = ({
               }
               disabled={isLoading}
             >
-              <SelectTrigger>
+              <SelectTrigger className="h-10 w-full shadow-none">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
@@ -179,13 +179,13 @@ const FilterPanel = ({
           </div>
 
           <div>
-            <label className="text-sm font-medium mb-1 block">Order</label>
+            <label className="text-sm font-medium mb-2 block">Order</label>
             <Select
               value={filters.order_by || "desc"}
               onValueChange={(value) => handleFilterChange("order_by", value)}
               disabled={isLoading}
             >
-              <SelectTrigger>
+              <SelectTrigger className="h-10 w-full shadow-none">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
