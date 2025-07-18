@@ -59,7 +59,7 @@ const MovieCard = memo(({ movie, className }: MovieCardProps) => {
           {highestQuality && (
             <Badge
               variant="secondary"
-              className="absolute top-2 sm:top-3 left-2 sm:left-3 bg-background/90 text-foreground hover:bg-background shadow-sm border-0 text-xs"
+              className="absolute top-2 sm:top-3 left-2 sm:left-3 bg-slate-900 text-white hover:bg-slate-800 shadow-sm border-0 text-xs"
             >
               {highestQuality}
             </Badge>
@@ -68,13 +68,13 @@ const MovieCard = memo(({ movie, className }: MovieCardProps) => {
           {showNewBadge && (
             <Badge
               variant="default"
-              className="absolute top-2 sm:top-3 left-2 sm:left-3 ml-14 sm:ml-16 bg-red-500 text-white hover:bg-red-600 shadow-sm border-0 animate-pulse text-xs"
+              className="absolute top-2 sm:top-3 left-2 sm:left-3 ml-14 sm:ml-16 bg-red-600 text-white hover:bg-red-700 shadow-sm border-0 animate-pulse text-xs"
             >
               NEW
             </Badge>
           )}
 
-          <div className="absolute top-2 sm:top-3 right-2 sm:right-3 flex items-center gap-1 bg-background/90 text-foreground px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-md text-xs shadow-sm">
+          <div className="absolute top-2 sm:top-3 right-2 sm:right-3 flex items-center gap-1 bg-slate-900 text-white px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-md text-xs shadow-sm">
             <Star className="w-3 h-3 fill-yellow-400 text-yellow-400" />
             <span className="font-medium">{movie.rating}</span>
           </div>
@@ -96,7 +96,7 @@ const MovieCard = memo(({ movie, className }: MovieCardProps) => {
                 <Badge
                   key={genre}
                   variant="outline"
-                  className="text-xs bg-background/60 border-border text-muted-foreground hover:bg-background/80 px-1.5 sm:px-2 py-0.5"
+                  className="text-xs bg-slate-100 border-slate-300 text-slate-800 hover:bg-slate-200 dark:bg-slate-800 dark:border-slate-600 dark:text-slate-200 dark:hover:bg-slate-700 px-1.5 sm:px-2 py-0.5"
                 >
                   {genre}
                 </Badge>
@@ -104,7 +104,7 @@ const MovieCard = memo(({ movie, className }: MovieCardProps) => {
               {movie.genres.length > 2 && (
                 <Badge
                   variant="outline"
-                  className="text-xs bg-background/60 border-border text-muted-foreground hover:bg-background/80 px-1.5 sm:px-2 py-0.5"
+                  className="text-xs bg-slate-100 border-slate-300 text-slate-800 hover:bg-slate-200 dark:bg-slate-800 dark:border-slate-600 dark:text-slate-200 dark:hover:bg-slate-700 px-1.5 sm:px-2 py-0.5"
                 >
                   +{movie.genres.length - 2}
                 </Badge>
