@@ -10,7 +10,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
-import { Search, Filter, X } from "lucide-react";
+import { Search, Filter, X, ChevronDown } from "lucide-react";
 import type { FilterPanelProps, MovieFilters } from "@/types/movie";
 import { GENRES, QUALITIES, SORT_OPTIONS } from "@/types/movie";
 import { cn } from "@/lib/utils";
@@ -70,7 +70,7 @@ const FilterPanel = ({
                 size="sm"
                 onClick={clearFilters}
                 disabled={isLoading}
-                className="text-xs"
+                className="text-xs h-8 w-20 flex items-center justify-center"
               >
                 <X className="w-3 h-3 mr-1" />
                 Clear
@@ -80,9 +80,15 @@ const FilterPanel = ({
               variant="ghost"
               size="sm"
               onClick={() => setIsExpanded(!isExpanded)}
-              className="text-xs"
+              className="text-xs h-8 w-20 flex items-center justify-center gap-1"
             >
-              {isExpanded ? "Less" : "More"}
+              <span>{isExpanded ? "Less" : "More"}</span>
+              <ChevronDown
+                className={cn(
+                  "w-3 h-3 transition-transform duration-300 ease-in-out",
+                  isExpanded && "rotate-180"
+                )}
+              />
             </Button>
           </div>
         </div>
@@ -119,8 +125,11 @@ const FilterPanel = ({
               }
               disabled={isLoading}
             >
-              <SelectTrigger className="h-10 w-full shadow-none">
-                <SelectValue />
+              <SelectTrigger
+                className="h-10 w-full shadow-none"
+                aria-label="Select video quality filter"
+              >
+                <SelectValue placeholder="Select quality" />
               </SelectTrigger>
               <SelectContent>
                 {QUALITIES.map((quality) => (
@@ -139,8 +148,11 @@ const FilterPanel = ({
               onValueChange={(value) => handleFilterChange("sort_by", value)}
               disabled={isLoading}
             >
-              <SelectTrigger className="h-10 w-full shadow-none">
-                <SelectValue />
+              <SelectTrigger
+                className="h-10 w-full shadow-none"
+                aria-label="Select sort criteria"
+              >
+                <SelectValue placeholder="Select sort by" />
               </SelectTrigger>
               <SelectContent>
                 {SORT_OPTIONS.map((option) => (
@@ -164,8 +176,11 @@ const FilterPanel = ({
               }
               disabled={isLoading}
             >
-              <SelectTrigger className="h-10 w-full shadow-none">
-                <SelectValue />
+              <SelectTrigger
+                className="h-10 w-full shadow-none"
+                aria-label="Select minimum rating filter"
+              >
+                <SelectValue placeholder="Select min rating" />
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="0">Any Rating</SelectItem>
@@ -185,8 +200,11 @@ const FilterPanel = ({
               onValueChange={(value) => handleFilterChange("order_by", value)}
               disabled={isLoading}
             >
-              <SelectTrigger className="h-10 w-full shadow-none">
-                <SelectValue />
+              <SelectTrigger
+                className="h-10 w-full shadow-none"
+                aria-label="Select sort order"
+              >
+                <SelectValue placeholder="Select order" />
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="desc">Descending</SelectItem>
@@ -196,31 +214,59 @@ const FilterPanel = ({
           </div>
         </div>
 
-        <div className={cn("space-y-2", !isExpanded && "hidden")}>
-          <label className="text-sm font-medium">Genre</label>
-          <div className="flex flex-wrap gap-2">
-            <Badge
-              variant={!filters.genre ? "default" : "outline"}
-              className="cursor-pointer"
-              onClick={() => handleFilterChange("genre", undefined)}
-            >
-              All Genres
-            </Badge>
-            {GENRES.map((genre) => (
+        <div
+          className={cn(
+            "overflow-hidden transition-all duration-500 ease-in-out",
+            isExpanded
+              ? "max-h-[500px] opacity-100 mt-4"
+              : "max-h-0 opacity-0 mt-0"
+          )}
+        >
+          <div className="space-y-3 pb-2">
+            <label className="text-sm font-medium">Genre</label>
+            <div className="flex flex-wrap gap-2">
               <Badge
-                key={genre}
-                variant={filters.genre === genre ? "default" : "outline"}
-                className="cursor-pointer"
-                onClick={() =>
-                  handleFilterChange(
-                    "genre",
-                    filters.genre === genre ? undefined : genre
-                  )
-                }
+                variant={!filters.genre ? "default" : "outline"}
+                className="cursor-pointer transition-all duration-200 hover:scale-105 border-border hover:bg-accent hover:text-accent-foreground"
+                onClick={() => handleFilterChange("genre", undefined)}
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    handleFilterChange("genre", undefined);
+                  }
+                }}
               >
-                {genre}
+                All Genres
               </Badge>
-            ))}
+              {GENRES.map((genre) => (
+                <Badge
+                  key={genre}
+                  variant={filters.genre === genre ? "default" : "outline"}
+                  className="cursor-pointer transition-all duration-200 hover:scale-105 border-border hover:bg-accent hover:text-accent-foreground"
+                  onClick={() =>
+                    handleFilterChange(
+                      "genre",
+                      filters.genre === genre ? undefined : genre
+                    )
+                  }
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      handleFilterChange(
+                        "genre",
+                        filters.genre === genre ? undefined : genre
+                      );
+                    }
+                  }}
+                >
+                  {genre}
+                </Badge>
+              ))}
+            </div>
           </div>
         </div>
 

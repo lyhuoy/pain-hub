@@ -33,9 +33,6 @@ export interface YTSErrorResponse {
   error?: string;
 }
 
-/**
- * Makes a request to the YTS API with standardized error handling
- */
 export async function fetchFromYTS(
   endpoint: string,
   params?: URLSearchParams
@@ -57,9 +54,6 @@ export async function fetchFromYTS(
   return response;
 }
 
-/**
- * Creates a standardized success response with CORS headers
- */
 export function createSuccessResponse<T>(data: T): NextResponse<T> {
   return NextResponse.json(data, {
     status: 200,
@@ -67,9 +61,6 @@ export function createSuccessResponse<T>(data: T): NextResponse<T> {
   });
 }
 
-/**
- * Creates a standardized error response
- */
 export function createErrorResponse(
   message: string,
   error?: unknown,
@@ -87,9 +78,6 @@ export function createErrorResponse(
   );
 }
 
-/**
- * Validates that a required parameter exists
- */
 export function validateRequiredParam(
   value: string | null,
   paramName: string

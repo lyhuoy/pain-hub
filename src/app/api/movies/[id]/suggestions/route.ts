@@ -10,10 +10,8 @@ export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
 
-    // Validate required movie_id parameter
     validateRequiredParam(searchParams.get("movie_id"), "Movie ID");
 
-    // Forward all query parameters to YTS API
     const params = new URLSearchParams();
     searchParams.forEach((value, key) => {
       params.append(key, value);
