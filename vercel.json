@@ -1,0 +1,10 @@
+{
+  "env": {
+    "YTS_API_BASE": "https://yts.mx/api/v2"
+  },
+  "build": {
+    "env": {
+      "YTS_API_BASE": "https://yts.mx/api/v2"
+    }
+  }
+}

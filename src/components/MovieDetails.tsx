@@ -32,13 +32,23 @@ const MovieDetails = ({ movie, className }: MovieDetailsProps) => {
       <div className="bg-card rounded-lg">
         <div className="relative grid md:grid-cols-[300px_1fr] gap-6 p-6">
           <div className="relative aspect-[2/3] w-full max-w-[300px] mx-auto md:mx-0">
-            <Image
-              src={movie.large_cover_image}
-              alt={movie.title}
-              fill
-              className="object-cover rounded-lg"
-              priority
-            />
+            {movie.large_cover_image ? (
+              <Image
+                src={movie.large_cover_image}
+                alt={movie.title}
+                fill
+                className="object-cover rounded-lg"
+                priority
+              />
+            ) : (
+              <div className="w-full h-full bg-muted rounded-lg flex items-center justify-center">
+                <span className="text-muted-foreground text-center">
+                  No Image
+                  <br />
+                  Available
+                </span>
+              </div>
+            )}
           </div>
 
           <div className="space-y-4">

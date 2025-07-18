@@ -25,7 +25,7 @@ export const fetchMovies = async (
   if (filters.with_rt_ratings) params.append("with_rt_ratings", "true");
 
   const response = await api.get<MovieListResponse>(
-    `/list_movies.json?${params.toString()}`
+    `/movies?${params.toString()}`
   );
   return response.data;
 };
@@ -44,7 +44,7 @@ export const fetchMovieDetails = async (
   if (options.withCast) params.append("with_cast", "true");
 
   const response = await api.get<MovieDetailsResponse>(
-    `/movie_details.json?${params.toString()}`
+    `/movies/${movieId}?${params.toString()}`
   );
   return response.data;
 };
@@ -56,7 +56,7 @@ export const fetchMovieSuggestions = async (
   params.append("movie_id", movieId.toString());
 
   const response = await api.get<MovieSuggestionsResponse>(
-    `/movie_suggestions.json?${params.toString()}`
+    `/movies/${movieId}/suggestions?${params.toString()}`
   );
   return response.data;
 };
@@ -68,7 +68,7 @@ export const fetchParentalGuides = async (
   params.append("movie_id", movieId.toString());
 
   const response = await api.get<ParentalGuidesResponse>(
-    `/movie_parental_guides.json?${params.toString()}`
+    `/movies/${movieId}/parental-guides?${params.toString()}`
   );
   return response.data;
 };
