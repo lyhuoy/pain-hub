@@ -81,6 +81,7 @@ const FilterPanel = ({
               size="sm"
               onClick={() => setIsExpanded(!isExpanded)}
               className="text-xs h-8 w-20 flex items-center justify-center gap-1"
+              disabled={isLoading}
             >
               <span>{isExpanded ? "Less" : "More"}</span>
               <ChevronDown
