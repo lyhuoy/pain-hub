@@ -14,13 +14,11 @@ export function ThemeToggle({ className }: ThemeToggleProps) {
   const { setTheme, resolvedTheme } = useTheme();
   const [mounted, setMounted] = React.useState(false);
 
-  // Prevent hydration mismatch by only rendering after mount
   React.useEffect(() => {
     setMounted(true);
   }, []);
 
   if (!mounted) {
-    // Return a placeholder with the same dimensions to prevent layout shift
     return (
       <Button
         variant="ghost"
@@ -45,7 +43,7 @@ export function ThemeToggle({ className }: ThemeToggleProps) {
       size="sm"
       onClick={toggleTheme}
       className={cn(
-        "w-10 h-10 rounded-full hover:bg-accent bg-card hover:text-accent-foreground transition-all duration-200 hover:scale-110 active:scale-95",
+        "w-10 h-10 rounded-full hover:bg-accent bg-card hover:text-accent-foreground transition-all duration-200 hover:scale-110 active:scale-95 cursor-pointer",
         className
       )}
       title={`Switch to ${resolvedTheme === "dark" ? "light" : "dark"} theme`}

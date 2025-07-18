@@ -29,20 +29,7 @@ const MovieDetails = ({ movie, className }: MovieDetailsProps) => {
 
   return (
     <div className={cn("space-y-6", className)}>
-      <div className="bg-card rounded-lg border border-border">
-        {/* {movie.background_image && (
-          <div className="absolute inset-0 -z-10">
-            <Image
-              src={movie.background_image}
-              alt=""
-              fill
-              className="object-cover"
-              priority
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-background/40" />
-          </div>
-        )} */}
-
+      <div className="bg-card rounded-lg">
         <div className="relative grid md:grid-cols-[300px_1fr] gap-6 p-6">
           <div className="relative aspect-[2/3] w-full max-w-[300px] mx-auto md:mx-0">
             <Image
@@ -219,38 +206,6 @@ const MovieDetails = ({ movie, className }: MovieDetailsProps) => {
           </div>
         </div>
       </div>
-
-      {movie.cast && movie.cast.length > 0 && (
-        <div className="bg-card p-6 rounded-lg border border-border">
-          <h2 className="text-lg font-semibold mb-4 text-card-foreground">
-            Cast
-          </h2>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-            {movie.cast.map((actor, index) => (
-              <div key={index} className="flex items-center gap-3">
-                {actor.url_small_image && (
-                  <div className="relative w-12 h-12 rounded-full overflow-hidden flex-shrink-0">
-                    <Image
-                      src={actor.url_small_image}
-                      alt={actor.name}
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
-                )}
-                <div className="min-w-0">
-                  <p className="font-medium text-sm truncate text-card-foreground">
-                    {actor.name}
-                  </p>
-                  <p className="text-xs text-muted-foreground truncate">
-                    {actor.character_name}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
     </div>
   );
 };

@@ -32,7 +32,7 @@ const QuoteDisplay = ({ className }: QuoteDisplayProps) => {
       const randomQuote = getRandomQuote();
       setCurrentQuote(randomQuote);
       setIsLoading(false);
-    }, 300);
+    }, 250);
   };
   if (isLoading) {
     return (
@@ -44,8 +44,8 @@ const QuoteDisplay = ({ className }: QuoteDisplayProps) => {
           >
             <RefreshCw className="h-4 w-4 text-muted-foreground animate-spin" />
           </button>
-          <div className="absolute inset-x-4 inset-y-2 flex items-center justify-center">
-            <div className="animate-pulse w-full max-w-md">
+          <div className="absolute inset-x-6 sm:inset-x-4 inset-y-2 flex items-center justify-center">
+            <div className="animate-pulse w-full max-w-md pr-8 sm:pr-4">
               <div className="space-y-2">
                 <div className="h-3 bg-muted rounded w-full"></div>
                 <div className="h-3 bg-muted rounded w-4/5 mx-auto"></div>
@@ -71,8 +71,8 @@ const QuoteDisplay = ({ className }: QuoteDisplayProps) => {
         >
           <RefreshCw className="h-4 w-4 text-muted-foreground hover:text-foreground transition-colors" />
         </button>
-        <div className="absolute inset-x-4 inset-y-2 flex items-center justify-center">
-          <blockquote className="text-base leading-relaxed text-foreground italic text-center w-full">
+        <div className="absolute inset-x-6 sm:inset-x-4 inset-y-2 flex items-center justify-center">
+          <blockquote className="text-[18px] leading-relaxed text-foreground italic text-center w-full pr-8 sm:pr-4">
             &ldquo;{currentQuote}&rdquo;
           </blockquote>
         </div>

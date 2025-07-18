@@ -5,45 +5,16 @@ import { notFound, useRouter } from "next/navigation";
 import Link from "next/link";
 import { Container } from "@/components/Container";
 import { Button } from "@/components/ui/button";
-import { Skeleton } from "@/components/ui/skeleton";
 import MovieDetails from "@/components/MovieDetails";
 import MovieSuggestions from "@/components/MovieSuggestions";
 import ParentalGuides from "@/components/ParentalGuides";
+import MovieDetailsSkeleton from "@/components/MovieDetailsSkeleton";
 import useMovieDetails from "@/hooks/useMovieDetails";
 import { ArrowLeft } from "lucide-react";
 
 interface MoviePageProps {
   params: Promise<{ id: string }>;
 }
-
-const MovieDetailsSkeleton = () => (
-  <div className="space-y-6">
-    {/* Hero Section Skeleton */}
-    <div className="bg-card rounded-lg border border-border">
-      <div className="relative grid md:grid-cols-[300px_1fr] gap-6 p-6">
-        <Skeleton className="aspect-[2/3] w-full rounded-lg" />
-        <div className="space-y-4">
-          <Skeleton className="h-8 w-3/4" />
-          <div className="flex gap-4">
-            <Skeleton className="h-6 w-16" />
-            <Skeleton className="h-6 w-20" />
-            <Skeleton className="h-6 w-16" />
-          </div>
-          <div className="flex gap-2">
-            <Skeleton className="h-6 w-16" />
-            <Skeleton className="h-6 w-20" />
-            <Skeleton className="h-6 w-14" />
-          </div>
-          <Skeleton className="h-24 w-full" />
-          <div className="flex gap-2">
-            <Skeleton className="h-10 w-32" />
-            <Skeleton className="h-10 w-28" />
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-);
 
 export default function MoviePage({ params }: MoviePageProps) {
   const router = useRouter();
@@ -56,7 +27,6 @@ export default function MoviePage({ params }: MoviePageProps) {
 
   const { data, isLoading, error } = useMovieDetails(movieId, {
     withImages: true,
-    withCast: true,
   });
 
   const handleBackClick = () => {

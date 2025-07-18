@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
+import Link from "next/link";
 import FilterPanel from "@/components/FilterPanel";
 import MovieCard from "@/components/MovieCard";
 import MovieCardSkeleton from "@/components/MovieCardSkeleton";
@@ -9,10 +10,9 @@ import Pagination from "@/components/Pagination";
 import useMovies from "@/hooks/useMovies";
 import type { MovieFilters } from "@/types/movie";
 import { Container } from "@/components/Container";
-import MatrixText from "@/components/kokonutui/matrix-text";
 import GlitchText from "@/components/kokonutui/glitch-text";
-import TypewriterTitle from "@/components/kokonutui/type-writer";
 import QuoteDisplay from "@/components/QuoteDisplay";
+import { ThemeToggle } from "./theme-toggle";
 
 const defaultFilters: MovieFilters = {
   page: 1,
@@ -25,7 +25,6 @@ export default function HomePageContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  // Initialize filters from URL params
   const getFiltersFromURL = useCallback((): MovieFilters => {
     const params = new URLSearchParams(searchParams.toString());
 
@@ -59,17 +58,14 @@ export default function HomePageContent() {
     ? Math.ceil(data.data.movie_count / (filters.limit || 20))
     : 0;
 
-  // Update filters when URL changes
   useEffect(() => {
     setFilters(getFiltersFromURL());
   }, [getFiltersFromURL]);
 
-  // Update URL when filters change
   const updateURL = useCallback(
     (newFilters: MovieFilters) => {
       const params = new URLSearchParams();
 
-      // Only add params that differ from defaults or are defined
       if (newFilters.page && newFilters.page !== defaultFilters.page) {
         params.set("page", newFilters.page.toString());
       }
@@ -107,7 +103,6 @@ export default function HomePageContent() {
   );
 
   const handleFiltersChange = (newFilters: MovieFilters) => {
-    // Reset to page 1 when filters change (except when only page changes)
     const resetPage = Object.keys(newFilters).some(
       (key) =>
         key !== "page" &&
@@ -130,10 +125,22 @@ export default function HomePageContent() {
   return (
     <Container className="py-8">
       <div className="space-y-8">
-        {/* Hero Section */}
-        <div className="space-y-4">
-          <h1 className="text-4xl font-bold">Pain Hub</h1>
-          <QuoteDisplay className="mt-6" />
+        <div className="space-y-6">
+          <div className="flex items-center justify-between">
+            <Link
+              href="/"
+              className="text-2xl sm:text-3xl md:text-4xl font-bold hover:opacity-80 transition-opacity cursor-pointer"
+            >
+              <h2 className="flex items-center gap-1">
+                Pain
+                <div className="bg-orange-400 p-1 sm:p-1.5 md:p-2 rounded-md sm:rounded-lg text-black">
+                  Hub
+                </div>
+              </h2>
+            </Link>
+            <ThemeToggle />
+          </div>
+          <QuoteDisplay />
         </div>
 
         <FilterPanel
@@ -157,7 +164,7 @@ export default function HomePageContent() {
         {!error && (
           <>
             {isLoading && (
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+              <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 sm:gap-6">
                 {Array.from({ length: filters.limit || 20 }, (_, i) => (
                   <MovieCardSkeleton key={i} />
                 ))}
@@ -165,13 +172,9 @@ export default function HomePageContent() {
             )}
 
             {!isLoading && movies.length > 0 && (
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+              <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 sm:gap-6">
                 {movies.map((movie) => (
-                  <MovieCard
-                    key={movie.id}
-                    movie={movie}
-                    className="transform transition-all duration-200 hover:scale-105 hover:shadow-xl"
-                  />
+                  <MovieCard key={movie.id} movie={movie} className="" />
                 ))}
               </div>
             )}

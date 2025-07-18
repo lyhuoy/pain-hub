@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Kantumruy_Pro } from "next/font/google";
 import "./globals.css";
 import { QueryProvider, ThemeProvider } from "@/contexts";
-import { ThemeToggle } from "@/components/theme-toggle";
 
 const kantumruyPro = Kantumruy_Pro({
   subsets: ["khmer"],
@@ -31,13 +30,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <div className="relative">
-            <div className="fixed top-4 left-4 z-50">
-              <ThemeToggle />
-            </div>
-
-            <QueryProvider>{children}</QueryProvider>
-          </div>
+          <QueryProvider>{children}</QueryProvider>
         </ThemeProvider>
       </body>
     </html>

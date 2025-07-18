@@ -32,6 +32,8 @@ interface GlitchTextProps {
   size?: "xs" | "sm" | "md" | "lg" | "xl" | "2xl" | "3xl" | number;
   fontWeight?: number;
   letterSpacing?: number;
+  as?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p" | "span" | "div";
+  style?: React.CSSProperties;
 }
 
 const GlitchText = ({
@@ -44,6 +46,8 @@ const GlitchText = ({
   size = "md",
   fontWeight = 500,
   letterSpacing = 5,
+  as: Component = "p",
+  style,
 }: GlitchTextProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -177,6 +181,7 @@ const GlitchText = ({
         "overflow-visible",
         className
       )}
+      style={style}
     >
       <motion.div
         className={cn(
@@ -194,7 +199,7 @@ const GlitchText = ({
         animate={!isStatic ? "animate" : "initial"}
         variants={glitchAnimation as any}
       >
-        <p>{text}</p>
+        <Component className="inherit-all">{text}</Component>
 
         <motion.div
           className="absolute inset-0 pointer-events-none"
@@ -229,7 +234,7 @@ const GlitchText = ({
             },
           }}
         >
-          <p>{text}</p>
+          <Component className="inherit-all">{text}</Component>
         </motion.div>
 
         <motion.div
@@ -265,7 +270,7 @@ const GlitchText = ({
             },
           }}
         >
-          <p>{text}</p>
+          <Component className="inherit-all">{text}</Component>
         </motion.div>
       </motion.div>
     </div>

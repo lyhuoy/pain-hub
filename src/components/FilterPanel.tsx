@@ -56,7 +56,7 @@ const FilterPanel = ({
   );
 
   return (
-    <Card className="mb-6 shadow-none border-none">
+    <Card className="shadow-none border-none">
       <CardHeader className="pb-3">
         <div className="flex items-center justify-between">
           <CardTitle className="text-lg flex items-center gap-2">

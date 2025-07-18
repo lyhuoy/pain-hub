@@ -58,7 +58,7 @@ const Pagination = ({
         size="sm"
         onClick={() => onPageChange(currentPage - 1)}
         disabled={currentPage <= 1 || isLoading}
-        className="flex items-center gap-1"
+        className="flex items-center gap-1 cursor-pointer"
       >
         <ChevronLeft className="w-4 h-4" />
         Previous
@@ -77,7 +77,7 @@ const Pagination = ({
                 size="sm"
                 onClick={() => onPageChange(page as number)}
                 disabled={isLoading}
-                className="w-8 h-8 p-0"
+                className="min-w-8 min-h-8 p-2 cursor-pointer"
               >
                 {page}
               </Button>
@@ -91,7 +91,7 @@ const Pagination = ({
         size="sm"
         onClick={() => onPageChange(currentPage + 1)}
         disabled={currentPage >= totalPages || isLoading}
-        className="flex items-center gap-1"
+        className="flex items-center gap-1 cursor-pointer"
       >
         Next
         <ChevronRight className="w-4 h-4" />
