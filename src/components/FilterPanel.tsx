@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useDeferredValue } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -22,17 +22,19 @@ const FilterPanel = ({
 }: FilterPanelProps) => {
   const [searchTerm, setSearchTerm] = useState(filters.query_term || "");
   const [isExpanded, setIsExpanded] = useState(false);
+  
+  const deferredSearchTerm = useDeferredValue(searchTerm);
 
   const handleSearchSubmit = useCallback(
     (e: React.FormEvent) => {
       e.preventDefault();
       onFiltersChange({
         ...filters,
-        query_term: searchTerm.trim() || undefined,
+        query_term: deferredSearchTerm.trim() || undefined,
         page: 1,
       });
     },
-    [filters, searchTerm, onFiltersChange]
+    [filters, deferredSearchTerm, onFiltersChange]
   );
 
   const handleFilterChange = useCallback(

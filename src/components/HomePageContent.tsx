@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useTransition, useDeferredValue } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import FilterPanel from "@/components/FilterPanel";
@@ -23,6 +23,8 @@ const defaultFilters: MovieFilters = {
 export default function HomePageContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
+  
+  const [isPending, startTransition] = useTransition();
 
   const getFiltersFromURL = useCallback((): MovieFilters => {
     const params = new URLSearchParams(searchParams.toString());
@@ -50,7 +52,9 @@ export default function HomePageContent() {
   }, [searchParams]);
 
   const [filters, setFilters] = useState<MovieFilters>(defaultFilters);
-  const { data, isLoading, error } = useMovies(filters);
+  
+  const deferredFilters = useDeferredValue(filters);
+  const { data, isLoading, error } = useMovies(deferredFilters);
 
   const movies = data?.data?.movies || [];
   const totalPages = data?.data?.movie_count
@@ -111,13 +115,17 @@ export default function HomePageContent() {
 
     const updatedFilters = resetPage ? { ...newFilters, page: 1 } : newFilters;
 
-    setFilters(updatedFilters);
+    startTransition(() => {
+      setFilters(updatedFilters);
+    });
     updateURL(updatedFilters);
   };
 
   const handlePageChange = (page: number) => {
     const newFilters = { ...filters, page };
-    setFilters(newFilters);
+    startTransition(() => {
+      setFilters(newFilters);
+    });
     updateURL(newFilters);
   };
 
@@ -145,7 +153,7 @@ export default function HomePageContent() {
         <FilterPanel
           filters={filters}
           onFiltersChange={handleFiltersChange}
-          isLoading={isLoading}
+          isLoading={isLoading || isPending}
         />
 
         {error && (
@@ -158,7 +166,7 @@ export default function HomePageContent() {
 
         {!error && (
           <>
-            {isLoading && (
+            {(isLoading || isPending) && (
               <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 sm:gap-6">
                 {Array.from({ length: filters.limit || 20 }, (_, i) => (
                   <MovieCardSkeleton key={i} />
@@ -166,20 +174,22 @@ export default function HomePageContent() {
               </div>
             )}
 
-            {!isLoading && movies.length > 0 && (
-              <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 sm:gap-6">
-                {movies.map((movie) => (
-                  <MovieCard key={movie.id} movie={movie} className="" />
-                ))}
-              </div>
-            )}
-
-            {!isLoading && movies.length === 0 && (
-              <div className="text-center py-12">
-                <p className="text-muted-foreground mt-2">
-                  Try adjusting your search criteria or filters.
-                </p>
-              </div>
+            {!isLoading && !isPending && (
+              <>
+                {movies.length > 0 ? (
+                  <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 sm:gap-6">
+                    {movies.map((movie) => (
+                      <MovieCard key={movie.id} movie={movie} className="" />
+                    ))}
+                  </div>
+                ) : (
+                  <div className="text-center py-12">
+                    <p className="text-muted-foreground mt-2">
+                      Try adjusting your search criteria or filters.
+                    </p>
+                  </div>
+                )}
+              </>
             )}
 
             {totalPages > 1 && (
@@ -187,7 +197,7 @@ export default function HomePageContent() {
                 currentPage={filters.page || 1}
                 totalPages={totalPages}
                 onPageChange={handlePageChange}
-                isLoading={isLoading}
+                isLoading={isLoading || isPending}
                 className="mt-8"
               />
             )}

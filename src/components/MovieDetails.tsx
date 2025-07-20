@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Star, Clock, Calendar, Download, ExternalLink } from "lucide-react";
 import type { Movie } from "@/types/movie";
 import { cn } from "@/lib/utils";
-import { isNew, formatRelativeTime } from "@/lib/date-utils";
+import { isNew } from "@/lib/date-utils";
 
 interface MovieDetailsProps {
   movie: Movie;
@@ -150,9 +150,6 @@ const MovieDetails = ({ movie, className }: MovieDetailsProps) => {
                           <span className="font-medium text-foreground">
                             {torrent.size}
                           </span>
-                          <div className="text-xs text-muted-foreground">
-                            {formatRelativeTime(torrent.date_uploaded_unix)}
-                          </div>
                           <div className="flex items-center gap-3 text-sm">
                             <div className="flex items-center gap-1">
                               <div className="w-2 h-2 bg-green-500 rounded-full"></div>
