@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Star, Clock, Calendar, Download, ExternalLink } from "lucide-react";
+import { Star, Clock, Calendar, Download, ExternalLink, FileText } from "lucide-react";
 import type { Movie } from "@/types/movie";
 import { cn } from "@/lib/utils";
 import { isNew } from "@/lib/date-utils";
@@ -100,7 +100,6 @@ const MovieDetails = ({ movie, className }: MovieDetailsProps) => {
               </div>
             )}
 
-            {/* Torrents */}
             {movie.torrents && movie.torrents.length > 0 && (
               <div className="space-y-4">
                 <h3 className="text-lg font-semibold flex items-center gap-2">
@@ -111,7 +110,7 @@ const MovieDetails = ({ movie, className }: MovieDetailsProps) => {
                   {movie.torrents.map((torrent, index) => (
                     <div
                       key={index}
-                      className="bg-muted/30 rounded-lg p-4 border border-border hover:border-border/80 transition-colors"
+                      className="bg-secondary rounded-lg p-4 transition-colors   "
                     >
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-3 flex-wrap">
@@ -182,22 +181,35 @@ const MovieDetails = ({ movie, className }: MovieDetailsProps) => {
               </div>
             )}
 
-            <div className="flex gap-2">
+            <div className="flex flex-wrap gap-2">
               {movie.imdb_code && (
-                <Button variant="outline" asChild>
-                  <a
-                    href={`https://www.imdb.com/title/${movie.imdb_code}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-2"
-                  >
-                    <ExternalLink className="w-4 h-4" />
-                    IMDb
-                  </a>
-                </Button>
+                <>
+                  <Button variant="outline" asChild className="shadow-none border-none">
+                    <a
+                      href={`https://www.imdb.com/title/${movie.imdb_code}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2"
+                    >
+                      <ExternalLink className="w-4 h-4" />
+                      IMDb
+                    </a>
+                  </Button>
+                  <Button variant="outline" asChild className="shadow-none border-none">
+                    <a
+                      href={`https://yifysubtitles.ch/movie-imdb/${movie.imdb_code}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2"
+                    >
+                      <FileText className="w-4 h-4" />
+                      Subtitles
+                    </a>
+                  </Button>
+                </>
               )}
               {movie.yt_trailer_code && (
-                <Button variant="outline" asChild>
+                <Button variant="outline" asChild className="shadow-none border-none">
                   <a
                     href={`https://www.youtube.com/watch?v=${movie.yt_trailer_code}`}
                     target="_blank"
