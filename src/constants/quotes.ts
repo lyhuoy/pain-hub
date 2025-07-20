@@ -1,6 +1,7 @@
 type Quote = string;
 
 const quotes: Quote[] = [
+  "Forgive and be nice to yourself. It's your first time living too.",
   "What do you want to be when you grow up? Kind.",
   "What do you think is the biggest waste of time? Comparing yourself to others.",
   "Do you have any other advice? Don't measure how valuable you are by the way you are treated.",

@@ -15,7 +15,9 @@ const nextConfig: NextConfig = {
       },
     ],
   },
-
+  experimental: {
+    optimizePackageImports: ["lucide-react", "@tanstack/react-query"],
+  },
   compiler: {
     removeConsole: process.env.NODE_ENV === "production",
   },

@@ -50,9 +50,10 @@ const FilterPanel = ({
   const hasActiveFilters = Boolean(
     filters.query_term ||
       filters.genre ||
-      filters.quality !== "all" ||
+      (filters.quality && filters.quality !== "all") ||
       filters.minimum_rating ||
-      filters.sort_by !== "date_added"
+      (filters.sort_by && filters.sort_by !== "year") ||
+      (filters.order_by && filters.order_by !== "desc")
   );
 
   return (
@@ -64,18 +65,16 @@ const FilterPanel = ({
             Filters
           </CardTitle>
           <div className="flex items-center gap-2">
-            {hasActiveFilters && (
-              <Button
+            <Button
                 variant="outline"
                 size="sm"
                 onClick={clearFilters}
-                disabled={isLoading}
+                disabled={isLoading || !hasActiveFilters}
                 className="text-xs h-8 w-20 flex items-center justify-center"
               >
                 <X className="w-3 h-3 mr-1" />
                 Clear
               </Button>
-            )}
             <Button
               variant="ghost"
               size="sm"
@@ -127,7 +126,7 @@ const FilterPanel = ({
               disabled={isLoading}
             >
               <SelectTrigger
-                className="h-10 w-full shadow-none"
+                className="h-10 w-full shadow-none focus:outline-none focus:ring-0 focus:ring-offset-0"
                 aria-label="Select video quality filter"
               >
                 <SelectValue placeholder="Select quality" />
@@ -150,7 +149,7 @@ const FilterPanel = ({
               disabled={isLoading}
             >
               <SelectTrigger
-                className="h-10 w-full shadow-none"
+                className="h-10 w-full shadow-none focus:outline-none focus:ring-0 focus:ring-offset-0"
                 aria-label="Select sort criteria"
               >
                 <SelectValue placeholder="Select sort by" />
@@ -178,7 +177,7 @@ const FilterPanel = ({
               disabled={isLoading}
             >
               <SelectTrigger
-                className="h-10 w-full shadow-none"
+                className="h-10 w-full shadow-none focus:outline-none focus:ring-0 focus:ring-offset-0"
                 aria-label="Select minimum rating filter"
               >
                 <SelectValue placeholder="Select min rating" />
@@ -202,7 +201,7 @@ const FilterPanel = ({
               disabled={isLoading}
             >
               <SelectTrigger
-                className="h-10 w-full shadow-none"
+                className="h-10 w-full shadow-none focus:outline-none focus:ring-0 focus:ring-offset-0"
                 aria-label="Select sort order"
               >
                 <SelectValue placeholder="Select order" />

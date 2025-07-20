@@ -10,7 +10,6 @@ import Pagination from "@/components/Pagination";
 import useMovies from "@/hooks/useMovies";
 import type { MovieFilters } from "@/types/movie";
 import { Container } from "@/components/Container";
-import GlitchText from "@/components/kokonutui/glitch-text";
 import QuoteDisplay from "@/components/QuoteDisplay";
 import { ThemeToggle } from "./theme-toggle";
 
@@ -151,10 +150,6 @@ export default function HomePageContent() {
 
         {error && (
           <div className="text-center py-12">
-            <GlitchText
-              text="Failed to load movies"
-              className="text-xl text-destructive"
-            />
             <p className="text-muted-foreground mt-2">
               Please try again later or adjust your filters.
             </p>
@@ -181,10 +176,6 @@ export default function HomePageContent() {
 
             {!isLoading && movies.length === 0 && (
               <div className="text-center py-12">
-                <GlitchText
-                  text="No movies found"
-                  className="text-xl text-muted-foreground"
-                />
                 <p className="text-muted-foreground mt-2">
                   Try adjusting your search criteria or filters.
                 </p>

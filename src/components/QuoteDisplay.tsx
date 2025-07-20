@@ -72,7 +72,7 @@ const QuoteDisplay = ({ className }: QuoteDisplayProps) => {
           <RefreshCw className="h-4 w-4 text-muted-foreground hover:text-foreground transition-colors" />
         </button>
         <div className="absolute inset-x-6 sm:inset-x-4 inset-y-2 flex items-center justify-center">
-          <blockquote className="text-[18px] leading-relaxed text-foreground italic text-center w-full pr-8 sm:pr-4">
+          <blockquote className="text-sm sm:text-base md:text-lg lg:text-xl leading-relaxed text-foreground italic text-center w-full pr-8 sm:pr-4">
             &ldquo;{currentQuote}&rdquo;
           </blockquote>
         </div>

@@ -180,9 +180,9 @@ export const GENRES = [
 export const QUALITIES = ["all", "720p", "1080p", "2160p", "3D"] as const;
 
 export const SORT_OPTIONS = [
+  { value: "year", label: "Year" },
   { value: "date_added", label: "Date Added" },
   { value: "title", label: "Title" },
-  { value: "year", label: "Year" },
   { value: "rating", label: "Rating" },
   { value: "peers", label: "Peers" },
   { value: "seeds", label: "Seeds" },
